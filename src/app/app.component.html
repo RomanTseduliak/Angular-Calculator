@@ -1,11 +1,10 @@
-
 <style>
-  
   .img-pro {
     width: 85px;
     margin-right: 156px;
     margin-top: -26px;
   }
+
   :host {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: 14px;
@@ -32,18 +31,7 @@
     flex: 1;
   }
 
-  .toolbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    background-color: #6cbcd9;
-    color: #ffc414;
-    font-weight: 600;
-  }
+
 
   .toolbar img {
     margin: 0 16px;
@@ -65,6 +53,22 @@
     max-width: 960px;
     flex-direction: column;
     align-items: center;
+    background: radial-gradient(50% 123.47% at 50% 50%, #878ad0 0%, #62c4f1 100%), linear-gradient(121.28deg, #0f009671 0%, #1802977a 100%), linear-gradient(360deg, #002aff34 0%, #1900ff5b 100%), radial-gradient(100% 164.72% at 100% 100%, #341aca1c 0%, #128db3d2 100%), radial-gradient(100% 148.07% at 0% 0%, #0026ff46 0%, #1500d56b 100%);
+    background-blend-mode: screen, color-dodge, overlay, difference, normal;
+
+  }
+
+  .toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: #6cbcd9;
+    color: #ffc414;
+    font-weight: 600;
   }
 
   svg.material-icons {
@@ -192,7 +196,7 @@
   }
 
   .terminal pre {
-    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
     color: white;
     padding: 0 1rem 1rem;
     margin: 0;
@@ -236,17 +240,17 @@
     align-items: center;
     font-size: 12px;
     padding: 3px 10px;
-    border: 1px solid rgba(27,31,35,.2);
+    border: 1px solid rgba(27, 31, 35, .2);
     border-radius: 3px;
-    background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
+    background-image: linear-gradient(-180deg, #fafbfc, #eff3f6 90%);
     margin-left: 4px;
     font-weight: 600;
-    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
   }
 
   .github-star-badge:hover {
-    background-image: linear-gradient(-180deg,#f0f3f6,#e6ebf1 90%);
-    border-color: rgba(27,31,35,.35);
+    background-image: linear-gradient(-180deg, #f0f3f6, #e6ebf1 90%);
+    border-color: rgba(27, 31, 35, .35);
     background-position: -.5em;
   }
 
@@ -268,7 +272,7 @@
   /* Responsive Styles */
   @media screen and (max-width: 767px) {
 
-    .card-container > *:not(.circle-link) ,
+    .card-container>*:not(.circle-link),
     .terminal {
       width: 100%;
     }
@@ -298,13 +302,10 @@
 
 <!-- Toolbar -->
 <div class="toolbar" role="banner">
-  <img
-    width="40"
-    alt="Angular Logo"
-src="../assets/Mr-Bean-halftone-by-Rones.svg"  />
+  <img width="40" alt="Angular Logo" src="../assets/Mr-Bean-halftone-by-Rones.svg" />
   <span>Hello my calc</span>
-    <div class="spacer"></div>
-    
+  <div class="spacer"></div>
+
 </div>
 
 <div class="content" role="main">
@@ -312,21 +313,22 @@ src="../assets/Mr-Bean-halftone-by-Rones.svg"  />
   <!-- Highlight Card -->
   <div class="card highlight-card card-small">
 
-    <svg id="rocket" alt="Rocket Ship" xmlns="http://www.w3.org/2000/svg" width="101.678" height="101.678" viewBox="0 0 101.678 101.678">
+    <svg id="rocket" alt="Rocket Ship" xmlns="http://www.w3.org/2000/svg" width="101.678" height="101.678"
+      viewBox="0 0 101.678 101.678">
       <g id="Group_83" data-name="Group 83" transform="translate(-141 -696)">
-        
-        <circle id="Ellipse_8" data-name="Ellipse 8" cx="50.839" cy="50.839" r="50.839" transform="translate(141 696)" fill="#6cbcd9"/>
+
+        <circle id="Ellipse_8" data-name="Ellipse 8" cx="50.839" cy="50.839" r="50.839" transform="translate(141 696)"
+          fill="#6cbcd9" />
         <g id="Group_47" data-name="Group 47" transform="translate(165.185 720.185)">
         </g>
       </g>
     </svg>
-   
+
     <span>{{ title }} app is running!</span>
 
-   
+
   </div>
   <div class="img-pro">
-    <img 
-    src="../assets/protester.svg">
+    <img src="../assets/protester.svg">
   </div>
-  
+  <app-user-interface></app-user-interface>

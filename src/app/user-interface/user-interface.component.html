@@ -1,1 +1,24 @@
-<p>user-interface works!</p>
+<div class="background">
+  <div class="calc-body">
+
+    <section class="show-input-value">
+      <input type="text" class="display" readonly placeholder="input value">
+    </section>
+
+    <section class="show-result-value">
+      <input type="text" class="display" readonly placeholder="result">
+    </section>
+
+    <section class="input-button">
+      <div [class]="['all', 'opers', 'digit']" (click)='haveValue(button.type)' *ngFor="let button of buttons">
+        <button [ngStyle]="{'background-color': button.background ? '#64cbf7'  : 'null'  }
+        ">{{button.name}}</button>
+      </div>
+
+      <!-- <button class="eq" (click)='getAnswer()'>=</button> -->
+    </section>
+
+
+
+  </div>
+</div>
