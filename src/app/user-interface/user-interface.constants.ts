@@ -12,9 +12,9 @@ export const Buttons = [
     type: 'opers',
   },
   {
-    name: '/',
+    name: '÷',
     type: 'opers',
-    background: '#64cbf7',
+    background: true,
   },
   {
     name: '7',
@@ -31,7 +31,7 @@ export const Buttons = [
   {
     name: 'x',
     type: 'opers',
-    background: '#64cbf7',
+    background: true,
   },
   {
     name: '4',
@@ -48,7 +48,7 @@ export const Buttons = [
   {
     name: '-',
     type: 'opers',
-    background: '#64cbf7',
+    background: true,
   },
   {
     name: '1',
@@ -65,7 +65,7 @@ export const Buttons = [
   {
     name: '+',
     type: 'opers',
-    background: '#64cbf7',
+    background: true,
   },
   {
     name: '0',
@@ -78,6 +78,6 @@ export const Buttons = [
   {
     name: '=',
     type: 'opers',
-    background: '#64cbf7',
+    background: true,
   },
 ];

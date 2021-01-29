@@ -10,25 +10,27 @@
   height: 667px;
   background-color: #f2f2f2;
   border-radius: 30px;
+  padding-top: 10px;
 }
-.show-input-value input {
+.show-input-value {
   width: 360px;
   height: 43px;
-  font-size: xx-large;
+  font-size: xxx-large;
   border: none;
   margin: 34px 4px 4px 4px;
   background-color: #f2f2f2;
   text-align: end;
   color: #5fc6f8;
 }
-.show-result-value input {
+.show-result-value {
   width: 360px;
   height: 82px;
-  font-size: xx-large;
+  font-size: xxx-large;
   border: none;
   margin: 4px;
   background-color: #f2f2f2;
   text-align: end;
+  color: #5fc6f8;
 }
 .input-button {
   display: flex;
@@ -38,9 +40,9 @@
   width: initial;
   justify-content: space-between;
 }
-.all .opers {
-  color: #5fc6f8;
+.all:last-of-type button {
   width: 150px;
+  border-radius: 40px;
 }
 .all button {
   display: flex;
@@ -61,6 +63,3 @@
 .all button:hover {
   opacity: 0.5;
 }
-// .all .opers button:last-child {
-//   width: 150px;
-// }

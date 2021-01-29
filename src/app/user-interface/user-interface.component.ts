@@ -10,82 +10,158 @@ import { Component, OnInit } from '@angular/core';
 export class UserInterfaceComponent implements OnInit {
   constructor() {}
   buttons = Buttons;
-  subText = '';
-  mainText = '';
-  operand1: number;
-  operand2: number;
-  operator = 'null';
-  calculationString = '';
+  otherDisplay = '';
+  mainDisplay = '';
+  firstDigit: number;
+  secondDigit: number;
+  togetherDigit = 'null';
+  calculationString = 'null';
   answered = false;
-  operatorSet = false;
+  togetherDigitSet: boolean;
 
   ngOnInit(): void {}
 
-  haveValue(key: Object) {
-    if (key === '/' || key === 'x' || key === '-' || key === '+') {
-      const lastKey = this.mainText[this.mainText.length - 1];
+  haveValue(name: string) {
+    if (
+      name === '%' ||
+      name === '+/-' ||
+      name === '÷' ||
+      name === 'x' ||
+      name === '-' ||
+      name === '+'
+    ) {
+      const lastButton = this.mainDisplay[this.mainDisplay.length - 1];
       if (
-        lastKey === '/' ||
-        lastKey === 'x' ||
-        lastKey === '-' ||
-        lastKey === '+'
+        lastButton === '%' ||
+        lastButton === '+/-' ||
+        lastButton === '÷' ||
+        lastButton === 'x' ||
+        lastButton === '-' ||
+        lastButton === '+'
       ) {
-        this.operatorSet = true;
+        this.togetherDigitSet = true;
+        return; //--
       }
-      if (this.operatorSet || this.mainText === '') {
-        return;
+      if (this.togetherDigitSet || this.mainDisplay === '') {
+        //return
       }
-      this.operand1 = parseFloat(this.mainText);
-      this.operator = this.operator;
-      this.operatorSet = true;
+      this.firstDigit = parseFloat(this.mainDisplay);
+      this.togetherDigit = name;
+      this.togetherDigitSet = true;
     }
-    if (this.mainText.length === 10) {
+    if (this.mainDisplay.length === 10) {
       return;
     }
-    this.mainText += key;
+    this.mainDisplay += name;
+    if (name === '=') {
+      this.getAnswer();
+    }
+    if (name === 'C') {
+      this.clear();
+    }
+    if (name === '.') {
+      this.getDecimal();
+    }
+    if (name === '%') {
+      this.getPercent();
+    }
+    if (name === '+/-') {
+      this.getSwitcher();
+    }
   }
-
   getAnswer() {
-    this.calculationString = this.mainText;
-    this.operand2 = parseFloat(this.mainText.split(this.operator)[1]);
-    if (this.operator === '/') {
-      this.subText = this.mainText;
-      this.mainText = (this.operand1 / this.operand2).toString();
-      this.subText = this.calculationString;
-      if (this.mainText.length > 9) {
-        this.mainText = this.mainText.substr(0, 9);
+    this.calculationString = this.mainDisplay;
+    this.secondDigit = parseFloat(
+      this.mainDisplay.split(this.togetherDigit)[1]
+    );
+    if (this.togetherDigit === '÷') {
+      this.otherDisplay = this.mainDisplay;
+      this.mainDisplay = (this.firstDigit / this.secondDigit).toString();
+      this.otherDisplay = this.calculationString;
+      if (this.mainDisplay.length > 9) {
+        this.mainDisplay = this.mainDisplay.substr(0, 9);
       }
-    } else if (this.operator === 'x') {
-      this.subText = this.mainText;
-      this.mainText = (this.operand1 * this.operand2).toString();
-      this.subText = this.calculationString;
-      if (this.mainText.length > 9) {
-        this.mainText = 'ERROR';
-        this.subText = 'Range Exceeded';
+    } else if (this.togetherDigit === 'x') {
+      this.otherDisplay = this.mainDisplay;
+      this.mainDisplay = (this.firstDigit * this.secondDigit).toString();
+      this.otherDisplay = this.calculationString;
+      if (this.mainDisplay.length > 9) {
+        this.mainDisplay = 'YomaYo';
+        this.otherDisplay = 'too many bro';
       }
-    } else if (this.operator === '-') {
-      this.subText = this.mainText;
-      this.mainText = (this.operand1 - this.operand2).toString();
-      this.subText = this.calculationString;
-    } else if (this.operator === '+') {
-      this.subText = this.mainText;
-      this.mainText = (this.operand1 + this.operand2).toString();
-      this.subText = this.calculationString;
-      if (this.mainText.length > 9) {
-        this.mainText = 'ERROR';
-        this.subText = 'Range Exceeded';
+    } else if (this.togetherDigit === '-') {
+      this.otherDisplay = this.mainDisplay;
+      this.mainDisplay = (this.firstDigit - this.secondDigit).toString();
+      this.otherDisplay = this.calculationString;
+    } else if (this.togetherDigit === '+') {
+      this.otherDisplay = this.mainDisplay;
+      this.mainDisplay = (this.firstDigit + this.secondDigit).toString();
+      this.otherDisplay = this.calculationString;
+      if (this.mainDisplay.length > 9) {
+        this.mainDisplay = 'YomaYo';
+        this.otherDisplay = 'too many bro';
       }
     } else {
-      this.subText = 'ERROR: Invalid Operation';
+      this.otherDisplay = "don't complicate bro";
     }
     this.answered = true;
   }
+
   clear() {
-    if (this.calculationString != '') {
-      this.calculationString = this.calculationString.substr(
-        0,
-        this.calculationString.length - 1
-      );
+    this.otherDisplay = '';
+    this.firstDigit = null;
+    this.togetherDigit = null;
+    // this.mainDisplay = this.calculationString.substr(
+    //   0,
+    //   this.calculationString.length - 1
+    // );
+    this.mainDisplay = '';
+  }
+
+  getDecimal() {
+    if (!this.calculationString.includes('.')) {
+      this.calculationString += '.';
+    }
+    return;
+  }
+
+  getPercent() {
+    const dispval = parseInt(this.mainDisplay, 0) / 100;
+    this.mainDisplay = dispval.toString();
+  }
+  getSwitcher() {
+    if (Math.sign(parseInt(this.mainDisplay, 0)) === 1) {
+      const sign = -Math.abs(parseInt(this.mainDisplay, 0));
+      this.mainDisplay = sign.toString();
+    } else if (Math.sign(parseInt(this.mainDisplay, 0)) === -1) {
+      const sign = Math.abs(parseInt(this.mainDisplay, 0));
+      this.mainDisplay = sign.toString();
+    } else {
+      this.mainDisplay = this.mainDisplay;
     }
   }
 }
+// if (character === '.') {
+//   character = '0' + character;
+// }
+// getDecimal(){
+//   if(!this.currentNumber.includes('.')){
+//       this.currentNumber += '.';
+//   }
+// }
+// if (num == '.') {
+//   if (this.input != '') {
+//     const lastNum = this.getLastOperand();
+//     console.log(lastNum.lastIndexOf('.'));
+//     if (lastNum.lastIndexOf('.') >= 0) return;
+//   }
+
+//   case '+/-':
+//         if (Math.sign(parseInt(this.display, 0)) === 1) {
+//           const sign = -Math.abs(parseInt(this.display, 0));
+//           this.display = sign.toString();
+//         } else if (Math.sign(parseInt(this.display, 0)) === -1) {
+//           const sign = Math.abs(parseInt(this.display, 0));
+//           this.display = sign.toString();
+//         } else {
+//           this.display = this.display;
