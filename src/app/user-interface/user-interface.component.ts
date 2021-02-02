@@ -16,15 +16,15 @@ export class UserInterfaceComponent implements OnInit {
   secondDigit: number;
   togetherDigit = 'null';
   calculationString = 'null';
-  answered = false;
+  answered: boolean;
   togetherDigitSet: boolean;
 
   ngOnInit(): void {}
 
   haveValue(name: string) {
+    console.log('name: ', name);
     if (
       name === '%' ||
-      name === '+/-' ||
       name === '÷' ||
       name === 'x' ||
       name === '-' ||
@@ -33,23 +33,35 @@ export class UserInterfaceComponent implements OnInit {
       const lastButton = this.mainDisplay[this.mainDisplay.length - 1];
       if (
         lastButton === '%' ||
-        lastButton === '+/-' ||
         lastButton === '÷' ||
         lastButton === 'x' ||
         lastButton === '-' ||
         lastButton === '+'
       ) {
         this.togetherDigitSet = true;
-        return; //--
       }
+
       if (this.togetherDigitSet || this.mainDisplay === '') {
-        //return
+        return this.haveValue;
       }
       this.firstDigit = parseFloat(this.mainDisplay);
       this.togetherDigit = name;
       this.togetherDigitSet = true;
     }
     if (this.mainDisplay.length === 10) {
+      return;
+    }
+    console.log(this.firstDigit);
+    console.log(this.secondDigit);
+    if (
+      name === '.' &&
+      ((this.mainDisplay &&
+        this.mainDisplay.includes('.') &&
+        !this.secondDigit &&
+        !this.firstDigit) ||
+        (this.firstDigit && this.firstDigit.toString().includes('.')) ||
+        (this.secondDigit && this.secondDigit.toString().includes('.')))
+    ) {
       return;
     }
     this.mainDisplay += name;
@@ -71,9 +83,10 @@ export class UserInterfaceComponent implements OnInit {
   }
   getAnswer() {
     this.calculationString = this.mainDisplay;
-    this.secondDigit = parseFloat(
-      this.mainDisplay.split(this.togetherDigit)[1]
-    );
+    const filtered = this.mainDisplay
+      .split(this.togetherDigit)
+      .filter((digit) => digit);
+    this.secondDigit = parseFloat(filtered[1]);
     if (this.togetherDigit === '÷') {
       this.otherDisplay = this.mainDisplay;
       this.mainDisplay = (this.firstDigit / this.secondDigit).toString();
@@ -105,31 +118,55 @@ export class UserInterfaceComponent implements OnInit {
       this.otherDisplay = "don't complicate bro";
     }
     this.answered = true;
+    this.togetherDigitSet = false;
   }
 
   clear() {
     this.otherDisplay = '';
     this.firstDigit = null;
     this.togetherDigit = null;
-    // this.mainDisplay = this.calculationString.substr(
-    //   0,
-    //   this.calculationString.length - 1
-    // );
     this.mainDisplay = '';
+    this.togetherDigitSet = false;
   }
 
   getDecimal() {
-    if (!this.calculationString.includes('.')) {
-      this.calculationString += '.';
-    }
-    return;
+    console.log('work');
+    // const lastButton = this.mainDisplay[this.mainDisplay.length - 1];
+
+    // if (this.mainDisplay === '.' ||)
+    // this.mainDisplay = '';
   }
+
+  //   if (!this.mainDisplay.includes('.')) {
+  //     return (this.mainDisplay += '.');
+  //   }
+  // }
+  //   if (
+  //     this.calculationString.includes('.') &&
+  //     this.mainDisplay.includes('.')
+  //   ) {
+  //     return; //--
+  //   }
+  // }
+  // if (calculationString === '.') {
+  //   this.calculationString = '0' + calculationString;
+  // }
+
+  // if (num == '.') {
+  //   if (this.calculationString != '') {
+  //     const lastNum = this.secondDigit();
+  //
+  //     if (lastButton.lastIndexOf('.') >= 0) return;
+  //   }
 
   getPercent() {
     const dispval = parseInt(this.mainDisplay, 0) / 100;
     this.mainDisplay = dispval.toString();
   }
   getSwitcher() {
+    if (this.mainDisplay === '+/-') {
+      this.mainDisplay = '';
+    }
     if (Math.sign(parseInt(this.mainDisplay, 0)) === 1) {
       const sign = -Math.abs(parseInt(this.mainDisplay, 0));
       this.mainDisplay = sign.toString();
@@ -141,27 +178,3 @@ export class UserInterfaceComponent implements OnInit {
     }
   }
 }
-// if (character === '.') {
-//   character = '0' + character;
-// }
-// getDecimal(){
-//   if(!this.currentNumber.includes('.')){
-//       this.currentNumber += '.';
-//   }
-// }
-// if (num == '.') {
-//   if (this.input != '') {
-//     const lastNum = this.getLastOperand();
-//     console.log(lastNum.lastIndexOf('.'));
-//     if (lastNum.lastIndexOf('.') >= 0) return;
-//   }
-
-//   case '+/-':
-//         if (Math.sign(parseInt(this.display, 0)) === 1) {
-//           const sign = -Math.abs(parseInt(this.display, 0));
-//           this.display = sign.toString();
-//         } else if (Math.sign(parseInt(this.display, 0)) === -1) {
-//           const sign = Math.abs(parseInt(this.display, 0));
-//           this.display = sign.toString();
-//         } else {
-//           this.display = this.display;
