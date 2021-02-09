@@ -51,8 +51,7 @@ export class UserInterfaceComponent implements OnInit {
     if (this.mainDisplay.length === 10) {
       return;
     }
-    console.log(this.firstDigit);
-    console.log(this.secondDigit);
+
     if (
       name === '.' &&
       ((this.mainDisplay &&
@@ -129,35 +128,7 @@ export class UserInterfaceComponent implements OnInit {
     this.togetherDigitSet = false;
   }
 
-  getDecimal() {
-    console.log('work');
-    // const lastButton = this.mainDisplay[this.mainDisplay.length - 1];
-
-    // if (this.mainDisplay === '.' ||)
-    // this.mainDisplay = '';
-  }
-
-  //   if (!this.mainDisplay.includes('.')) {
-  //     return (this.mainDisplay += '.');
-  //   }
-  // }
-  //   if (
-  //     this.calculationString.includes('.') &&
-  //     this.mainDisplay.includes('.')
-  //   ) {
-  //     return; //--
-  //   }
-  // }
-  // if (calculationString === '.') {
-  //   this.calculationString = '0' + calculationString;
-  // }
-
-  // if (num == '.') {
-  //   if (this.calculationString != '') {
-  //     const lastNum = this.secondDigit();
-  //
-  //     if (lastButton.lastIndexOf('.') >= 0) return;
-  //   }
+  getDecimal() {}
 
   getPercent() {
     const dispval = parseInt(this.mainDisplay, 0) / 100;
